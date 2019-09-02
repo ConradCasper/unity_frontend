@@ -1,10 +1,13 @@
 import React from 'react';
-import logo from './logo.svg';
+import logo from './unity_logo.png';
 import './App.css';
+import NavBar from './components/NavBar'
+import Footer from './components/Footer'
 
 function App() {
   return (
     <div className="App">
+    <NavBar />
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
@@ -19,6 +22,7 @@ function App() {
           Learn React
         </a>
       </header>
+      <Footer />
     </div>
   );
 }
