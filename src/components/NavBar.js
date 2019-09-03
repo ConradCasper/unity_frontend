@@ -20,19 +20,19 @@ export default class NavBar extends Component {
                             <Image size='mini' src={logo} style={{ marginRight: '1.5em' }} />
                             Unity
                         </Menu.Item>
-                        <Menu.Item inverted position='right'>
+                        <Menu.Item position='right'>
                             <Form inverted>
                                 <Form.Group>
-                                    <Form.Field inverted>
+                                    <Form.Field inverted="true">
                                         <label>Email</label>
                                         <Form.Input placeholder='Email' icon='user' iconPosition='left'/>
                                     </Form.Field>
-                                    <Form.Field inverted>
+                                    <Form.Field inverted='true'>
                                         <label>Password</label>
                                         <Form.Input placeholder='Password' type="password" icon='lock' iconPosition='left'/>
                                     </Form.Field>
                                     <Form.Field>
-                                        <Button as='a' inverted style={{ marginTop: '1.25em' }}>
+                                        <Button as='a' inverted style={{ marginTop: '1.3em' }}>
                                             Log in
                                     </Button>
                                     </Form.Field>
