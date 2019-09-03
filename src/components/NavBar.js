@@ -25,11 +25,11 @@ export default class NavBar extends Component {
                                 <Form.Group>
                                     <Form.Field inverted>
                                         <label>Email</label>
-                                        <input placeholder='Email' />
+                                        <Form.Input placeholder='Email' icon='user' iconPosition='left'/>
                                     </Form.Field>
                                     <Form.Field inverted>
                                         <label>Password</label>
-                                        <input placeholder='Password' type="password" />
+                                        <Form.Input placeholder='Password' type="password" icon='lock' iconPosition='left'/>
                                     </Form.Field>
                                     <Form.Field>
                                         <Button as='a' inverted style={{ marginTop: '1.25em' }}>
