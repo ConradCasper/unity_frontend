@@ -11,6 +11,7 @@ function App() {
       <NavBar />
       <Switch>
         <Route path='/welcome' render={ () => (<Login />) }/>
+        {/* <Route path='/home' render={ () => (<Home />) } /> */}
       </Switch>
       <Footer />
     </div>
