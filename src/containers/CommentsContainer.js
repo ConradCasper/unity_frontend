@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import { Button, Comment, Form, Header, Segment } from 'semantic-ui-react'
+import dayjs from 'dayjs'
+import relativeTime from 'dayjs/plugin/relativeTime'
 
 class CommentsContainer extends Component {
     render() {
+        
         const comments = this.props.comments.map(comment => {
             return (
             <Segment key={comment.id}>
@@ -11,7 +14,7 @@ class CommentsContainer extends Component {
                     <Comment.Content>
                         <Comment.Author as="a">{`${comment.user.first_name} ${comment.user.last_name}`}</Comment.Author>
                         <Comment.Metadata>
-                            <div>{comment.created_at}</div>
+                            <div>{dayjs(comment.created_at).fromNow()}</div>
                         </Comment.Metadata>
                         <Comment.Text>{comment.content}</Comment.Text>
                     </Comment.Content>
@@ -19,6 +22,7 @@ class CommentsContainer extends Component {
             </Segment>
             )
         })
+        dayjs.extend(relativeTime)
         return (
             <Segment padded="very">
                 <Comment.Group>

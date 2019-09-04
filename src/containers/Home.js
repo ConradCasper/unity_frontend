@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Container } from 'semantic-ui-react'
 import MainFeed from './MainFeed'
+import PostForm from '../components/posts/PostForm'
 
 class Home extends Component {
 
@@ -34,7 +35,7 @@ class Home extends Component {
     render() {
         return (
             <Container style={{"marginTop":"6em", "width": "50em"}}>
-                {/* <PostForm /> */}
+                <PostForm style={{ "marginTop":"4em" }}/>
                 <MainFeed posts={this.state.posts}/>
             </Container>
         );

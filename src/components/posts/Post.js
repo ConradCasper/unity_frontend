@@ -1,23 +1,33 @@
 import React, { Component } from 'react';
-import { Feed, Icon, Segment } from 'semantic-ui-react'
+import { Feed, Icon, Segment, Image } from 'semantic-ui-react'
 import CommentsContainer from '../../containers/CommentsContainer'
+import dayjs from 'dayjs'
+import relativeTime from 'dayjs/plugin/relativeTime'
 class Post extends Component {
     
     render() {
-        const { content, created_at, user, likes, comments } = this.props.post
+        const { content, created_at, user, likes, comments, img_url } = this.props.post
+        dayjs.extend(relativeTime)
         return (
             <Segment>
                 <Segment.Group>
                     <Segment>
                         <Feed.Event>
-                            <Feed.Label image={user.avatar}/>
+                            <Feed.Label>
+                                <Image avatar src={user.avatar} size="small" />
+                            </Feed.Label>
                             <Feed.Content>
-                                <Feed.Date content={created_at}/>
+                                <Feed.Date content={dayjs(created_at).fromNow()}/>
                                 <Feed.Summary content={`${user.first_name} ${user.last_name} created a post`} />
                                 <Feed.Extra text content={content} />
+                                <Feed.Extra images>
+                                    
+                                    <img src={img_url} alt="post" />
+                                    
+                                </Feed.Extra>
                                 <Feed.Meta>
                                     <Feed.Like>
-                                        <Icon name='like' />{likes.length}
+                                        <Icon name='like' color="red" />{likes.length}
                                     </Feed.Like>
                                 </Feed.Meta>
                             </Feed.Content>
