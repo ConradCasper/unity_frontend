@@ -4,7 +4,7 @@ import logo from '../../src/unity_logo.png'
 
 
 
-export default class Login extends Component {
+export default class SignUp extends Component {
 
     constructor(){
         super()
