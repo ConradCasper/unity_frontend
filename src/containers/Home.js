@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Container } from 'semantic-ui-react'
 import MainFeed from './MainFeed'
 
 class Home extends Component {
@@ -32,10 +33,10 @@ class Home extends Component {
 
     render() {
         return (
-            <div>
+            <Container style={{"marginTop":"6em", "width": "50em"}}>
                 {/* <PostForm /> */}
                 <MainFeed posts={this.state.posts}/>
-            </div>
+            </Container>
         );
     }
 }

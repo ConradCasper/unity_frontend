@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Feed } from 'semantic-ui-react'
 import Post from '../components/posts/Post'
 
+
 class MainFeed extends Component {
     
     render() {
@@ -10,7 +11,7 @@ class MainFeed extends Component {
         })
         return (
            
-            <Feed>
+            <Feed className="MainFeed">
                 {posts}
             </Feed>
         );

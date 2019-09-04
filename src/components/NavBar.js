@@ -71,7 +71,7 @@ export default class NavBar extends Component {
                                         <Form.Input placeholder='Password' type="password" icon='lock' iconPosition='left' name="password" value={this.state.password} onChange={this.handleOnChange}/>
                                     </Form.Field>
                                     <Form.Field>
-                                        <Button inverted style={{ marginTop: '1.3em' }} type="submit">
+                                        <Button  style={{ marginTop: '1.3em' }} type="submit" color="orange">
                                             Log in
                                         </Button>
                                     </Form.Field>
