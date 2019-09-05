@@ -35,7 +35,7 @@ class Post extends Component {
                         </Feed.Event>
                     </Segment>
                     <Segment>
-                        <CommentsContainer comments={comments} floated="left" postId={id}/>
+                        <CommentsContainer comments={comments} floated="left" postId={id} addCommentToPost={this.props.addCommentToPost}/>
                     </Segment>
                 </Segment.Group>
             </Segment>       

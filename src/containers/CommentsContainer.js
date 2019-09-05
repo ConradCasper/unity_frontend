@@ -35,7 +35,9 @@ class CommentsContainer extends Component {
         }
         fetch(`http://localhost:3000/api/v1/comments`, request)
         .then(res => res.json())
-        .then(comment => console.log(comment))
+        .then(comment => this.props.addCommentToPost(this.state.post_id, comment))
+
+
 
         this.setState({...this.state, content: ''})
 

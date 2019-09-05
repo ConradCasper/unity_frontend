@@ -30,6 +30,15 @@ export default class App extends Component{
     }))
 }
 
+  addPost = (post) => {
+    this.setState({posts: [post, ...this.state.posts]})
+  }
+
+  addCommentToPost = (postId, comment) => {
+    const post = this.state.posts.find(post => post.id === postId)
+    
+  }
+
 
   render(){
     return (
@@ -37,7 +46,7 @@ export default class App extends Component{
         <NavBar />
         <Switch>
           <Route path='/welcome' render={ () => (<SignUp />) }/>
-          <Route path='/home' render={ routerProps => (<Home {...routerProps} posts={this.state.posts}/>) } />
+          <Route path='/home' render={ props => (<Home {...props} addPost={this.addPost} posts={this.state.posts} addCommentToPost={this.addCommentToPost} />)} />
         </Switch>
         
         <Footer />
