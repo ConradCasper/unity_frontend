@@ -41,7 +41,13 @@ export default class NavBar extends Component {
 
         fetch(`http://localhost:3000/api/v1/login`, requestObject)
         .then(res => res.json())
-        .then(data => localStorage.setItem("jwt", data.jwt))
+        .then(data => {
+            localStorage.setItem("jwt", data.jwt)
+            localStorage.setItem("current_user", JSON.stringify(data.user))
+        }
+        )
+
+        // localStorage.setItem("current_user", user)
         
         this.setState({
             email: '',

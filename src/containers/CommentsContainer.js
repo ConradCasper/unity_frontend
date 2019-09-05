@@ -4,9 +4,45 @@ import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 
 class CommentsContainer extends Component {
+    constructor(props){
+        super(props)
+        this.state ={
+            post_id: props.postId,
+            content: ''
+        }
+    }
+
+    handleOnChange = e => {
+        this.setState({
+            content: e.target.value
+        })
+    }
+
+    handleOnSubmit = e => {
+        e.preventDefault()
+        const comment = this.state
+        const token = localStorage.getItem("jwt")
+        const request = {
+            method: "POST",
+            headers: {
+                "Content-Type":"application/json",
+                "Accept":"application/json",
+                "Authorization": `Bearer ${token}`
+            },
+            body:JSON.stringify({
+                comment: comment
+            })
+        }
+        fetch(`http://localhost:3000/api/v1/comments`, request)
+        .then(res => res.json())
+        .then(comment => console.log(comment))
+
+        this.setState({...this.state, content: ''})
+
+    }
     render() {
-        
-        const comments = this.props.comments.map(comment => {
+        const sortedComments = this.props.comments.sort((a, b) => b.id - a.id)
+        const comments = sortedComments.map(comment => {
             return (
             <Segment key={comment.id}>
                 <Comment>
@@ -22,6 +58,9 @@ class CommentsContainer extends Component {
             </Segment>
             )
         })
+        
+        
+
         dayjs.extend(relativeTime)
         return (
             <Segment padded="very">
@@ -30,9 +69,9 @@ class CommentsContainer extends Component {
                         Comments
                     </Header>
                     {comments}
-                    <Form reply>
-                        <Form.TextArea />
-                        <Button content='Add Comment' labelPosition='left' icon='edit' color="orange"/>
+                    <Form reply onSubmit={this.handleOnSubmit}>
+                        <Form.TextArea value={this.state.content} name="content" onChange={this.handleOnChange}/>
+                        <Button content='Add Comment' labelPosition='left' icon='edit' color="orange" type="submit"/>
                     </Form>
                 </Comment.Group>
             </Segment>

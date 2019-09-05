@@ -15,7 +15,20 @@ export default class App extends Component{
     }
   }
 
-  
+  componentDidMount(){
+    let token = localStorage.getItem("jwt")
+    fetch(`http://localhost:3000/api/v1/posts`,{
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+            "Authorization": `Bearer ${token}` 
+        }
+    })
+    .then(res => res.json())
+    .then(posts => this.setState({
+        posts: posts
+    }))
+}
 
 
   render(){
@@ -24,7 +37,7 @@ export default class App extends Component{
         <NavBar />
         <Switch>
           <Route path='/welcome' render={ () => (<SignUp />) }/>
-          <Route path='/home' render={ () => (<Home />) } />
+          <Route path='/home' render={ routerProps => (<Home {...routerProps} posts={this.state.posts}/>) } />
         </Switch>
         
         <Footer />

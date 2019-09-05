@@ -6,7 +6,7 @@ import relativeTime from 'dayjs/plugin/relativeTime'
 class Post extends Component {
     
     render() {
-        const { content, created_at, user, likes, comments, img_url } = this.props.post
+        const { id, content, created_at, user, likes, comments, img_url } = this.props.post
         dayjs.extend(relativeTime)
         return (
             <Segment>
@@ -22,7 +22,7 @@ class Post extends Component {
                                 <Feed.Extra text content={content} />
                                 <Feed.Extra images>
                                     
-                                    <img src={img_url} alt="post" />
+                                      <img src={img_url} alt={`${user.first_name} ${user.last_name} shared something`} />
                                     
                                 </Feed.Extra>
                                 <Feed.Meta>
@@ -35,7 +35,7 @@ class Post extends Component {
                         </Feed.Event>
                     </Segment>
                     <Segment>
-                        <CommentsContainer comments={comments} floated="left"/>
+                        <CommentsContainer comments={comments} floated="left" postId={id}/>
                     </Segment>
                 </Segment.Group>
             </Segment>       
