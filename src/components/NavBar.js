@@ -10,6 +10,51 @@ import {
 
 
 export default class NavBar extends Component {
+
+    constructor(){
+        super()
+        this.state ={
+            email: '',
+            password: ''
+        }
+    }
+
+    handleOnChange = e => {
+        this.setState({
+            [e.target.name]: e.target.value
+        })
+    }
+
+    handleOnSubmit = e => {
+        e.preventDefault()
+        const userCreds = this.state
+        const requestObject ={
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            body:JSON.stringify({
+                user: userCreds
+            })
+        }
+
+        fetch(`http://localhost:3000/api/v1/login`, requestObject)
+        .then(res => res.json())
+        .then(data => {
+            localStorage.setItem("jwt", data.jwt)
+            localStorage.setItem("current_user", JSON.stringify(data.user))
+        }
+        )
+
+        // localStorage.setItem("current_user", user)
+        
+        this.setState({
+            email: '',
+            password: ''
+        })
+    }
+
     render() {
         return (
             <div>
@@ -21,20 +66,20 @@ export default class NavBar extends Component {
                             Unity
                         </Menu.Item>
                         <Menu.Item position='right'>
-                            <Form inverted>
+                            <Form inverted onSubmit={this.handleOnSubmit}>
                                 <Form.Group>
                                     <Form.Field inverted="true">
                                         <label>Email</label>
-                                        <Form.Input placeholder='Email' icon='user' iconPosition='left'/>
+                                        <Form.Input placeholder='Email' type="text" icon='user' iconPosition='left' name="email" value={this.state.email} onChange={this.handleOnChange}/>
                                     </Form.Field>
                                     <Form.Field inverted='true'>
                                         <label>Password</label>
-                                        <Form.Input placeholder='Password' type="password" icon='lock' iconPosition='left'/>
+                                        <Form.Input placeholder='Password' type="password" icon='lock' iconPosition='left' name="password" value={this.state.password} onChange={this.handleOnChange}/>
                                     </Form.Field>
                                     <Form.Field>
-                                        <Button as='a' inverted style={{ marginTop: '1.3em' }}>
+                                        <Button  style={{ marginTop: '1.3em' }} type="submit" color="orange">
                                             Log in
-                                    </Button>
+                                        </Button>
                                     </Form.Field>
                                 </Form.Group>
 
