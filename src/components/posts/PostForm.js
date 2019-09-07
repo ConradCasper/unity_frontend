@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Form, TextArea, Image, Segment, Button } from 'semantic-ui-react';
 
+
 class PostForm extends Component {
     constructor(){
         super()
@@ -51,6 +52,7 @@ class PostForm extends Component {
     render() {
         const current_user = JSON.parse(localStorage.getItem("current_user"))
         const { first_name, last_name, avatar  } = current_user
+        
         return (
             <Segment>
             <Segment.Group>
@@ -72,5 +74,7 @@ class PostForm extends Component {
         );
     }
 }
+
+
 
 export default PostForm;

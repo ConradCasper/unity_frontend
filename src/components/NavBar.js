@@ -1,28 +1,29 @@
 import React, { Component } from 'react';
 import logo from '../unity_logo.png';
+import { Link } from 'react-router-dom';
 import {
     Container,
     Form,
     Button,
     Image,
-    Menu
+    Menu,
+    Search
 } from 'semantic-ui-react'
 
 
-export default class NavBar extends Component {
+class NavBar extends Component {
 
-    constructor(){
-        super()
+    constructor(props){
+        super(props)
         this.state ={
             email: '',
             password: ''
         }
     }
 
+
     handleOnChange = e => {
-        this.setState({
-            [e.target.name]: e.target.value
-        })
+        this.setState({ [e.target.name]: e.target.value })
     }
 
     handleOnSubmit = e => {
@@ -43,11 +44,11 @@ export default class NavBar extends Component {
         .then(res => res.json())
         .then(data => {
             localStorage.setItem("jwt", data.jwt)
-            localStorage.setItem("current_user", JSON.stringify(data.user))
-        }
-        )
+            this.props.login(data.user)
+        })
+            
 
-        // localStorage.setItem("current_user", user)
+        
         
         this.setState({
             email: '',
@@ -58,12 +59,55 @@ export default class NavBar extends Component {
     render() {
         return (
             <div>
+            {(localStorage.getItem("current_user")) ? 
+            
                 <Container>
                     <Menu fixed='top' inverted>
 
                         <Menu.Item as='a' header>
                             <Image size='mini' src={logo} style={{ marginRight: '1.5em' }} />
-                            Unity
+                            <h3 style={{ "paddingBottom": "1.2em" }}>Unity</h3>
+                        </Menu.Item>
+                        <Menu.Item>
+                        <Search/>
+                        </Menu.Item>
+                            
+                        
+                                <Menu.Item>
+                                  <Link to='/home'> Home </Link>  
+                                </Menu.Item>
+                                <Menu.Item as="a">
+                                    Profile
+                                </Menu.Item>
+                                <Menu.Item as="a">
+                                    Edit Profile
+                                </Menu.Item>
+                        
+                        <Menu.Item position='right'>
+                            
+                                        <Button color="orange" onClick={this.props.logout}>
+                                            Logout
+                                        </Button>
+                                    
+                        </Menu.Item>
+
+                    </Menu>
+                </Container>
+
+            
+            
+            
+            
+            : 
+            
+            
+            
+            <Container>
+                    <Menu fixed='top' inverted>
+
+                        <Menu.Item as='a' header>
+                            <Image size='mini' src={logo} style={{ marginRight: '1.5em' }} />
+                            <h3 style={{ "paddingBottom": "1.2em" }}>Unity</h3>
                         </Menu.Item>
                         <Menu.Item position='right'>
                             <Form inverted onSubmit={this.handleOnSubmit}>
@@ -87,9 +131,18 @@ export default class NavBar extends Component {
                         </Menu.Item>
 
                     </Menu>
-                </Container>
-
+                </Container> 
+                
+                }
+                
             </div>
         )
     }
 }
+
+
+
+
+
+
+export default NavBar;

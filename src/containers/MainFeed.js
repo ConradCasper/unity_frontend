@@ -6,13 +6,16 @@ import Post from '../components/posts/Post'
 class MainFeed extends Component {
     
     render() {
-        const posts = this.props.posts.map(post => {
-            return <Post key={post.id} post={post} addCommentToPost={this.props.addCommentToPost} />
+        
+        
+        const renderPosts = this.props.posts.map(post => {
+            
+            return <Post key={post.id} post={post} users={this.props.users} likes={this.props.likes} comments={this.props.comments} resetAppState={this.props.resetAppState} />
         })
         return (
            
             <Feed className="MainFeed">
-                {posts}
+                {renderPosts}
             </Feed>
         );
     }

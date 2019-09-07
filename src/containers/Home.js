@@ -7,10 +7,13 @@ class Home extends Component {
 
 
     render() {
+        
+        
         return (
+            
             <Container style={{"marginTop":"6em", "width": "50em"}}>
-                <PostForm style={{ "marginTop":"4em" }} addPost={this.props.addPost}/>
-                <MainFeed posts={this.props.posts} addCommentToPost={this.props.addCommentToPost}/>
+                <PostForm style={{ "marginTop":"4em" }}  resetAppState={this.props.resetAppState}/>
+                <MainFeed posts={this.props.posts} comments={this.props.comments} users={this.props.users} likes={this.props.likes} resetAppState={this.props.resetAppState}/>
             </Container>
         );
     }
