@@ -96,8 +96,8 @@ export default class App extends Component{
       <div className="App" >
         <NavBar current_user={this.state.current_user} login={this.login} logout={this.logout}/>
         <Switch>
-          <Route path='/welcome' render={ () => (<SignUp />) }/>
-          <Route path='/home' render={ () => (<Home   posts={this.state.posts} comments={this.state.comments} likes={this.state.likes} users={this.state.users}  resetAppState={this.resetAppState}/>)} />
+          <Route path='/welcome' render={ () => (<SignUp controller={this.controller} />) }/>
+          <Route path='/home' render={ () => (<Home   posts={this.state.posts} follows={this.state.follows} comments={this.state.comments} likes={this.state.likes} users={this.state.users}  resetAppState={this.resetAppState}/>)} />
         </Switch>
         
         <Footer />

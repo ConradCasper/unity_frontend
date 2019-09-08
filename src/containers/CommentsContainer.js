@@ -35,30 +35,45 @@ class CommentsContainer extends Component {
         }
         fetch(`http://localhost:3000/api/v1/comments`, request)
         .then(res => res.json())
-        .then(comment => this.props.addCommentToPost(this.state.post_id, comment))
+        .then(comment => this.props.resetAppState())
 
 
 
         this.setState({...this.state, content: ''})
 
     }
+
+
+
+
+
     render() {
-        const sortedComments = this.props.comments.sort((a, b) => b.id - a.id)
-        const comments = sortedComments.map(comment => {
-            return (
-            <Segment key={comment.id}>
-                <Comment>
-                    <Comment.Avatar src={comment.user.avatar}/>
-                    <Comment.Content>
-                        <Comment.Author as="a">{`${comment.user.first_name} ${comment.user.last_name}`}</Comment.Author>
-                        <Comment.Metadata>
-                            <div>{dayjs(comment.created_at).fromNow()}</div>
-                        </Comment.Metadata>
-                        <Comment.Text>{comment.content}</Comment.Text>
-                    </Comment.Content>
-                </Comment>
-            </Segment>
-            )
+        const { users, comments, postId, resetAppState } = this.props
+        const postComments = comments.filter(comment => {
+          return  comment.post_id === postId
+        })
+        
+        const renderComments = postComments.map(comment => {
+            for (let i = 0; i < users.length; i++){
+                if(comment.user_id === users[i].id){
+                    return (
+                        <Segment key={comment.id}>
+                            <Comment>
+                                <Comment.Avatar src={users[i].avatar}/>
+                                <Comment.Content>
+                                    <Comment.Author as="a">{`${users[i].first_name} ${users[i].last_name}`}</Comment.Author>
+                                    <Comment.Metadata>
+                                        <div>{dayjs(comment.created_at).fromNow()}</div>
+                                    </Comment.Metadata>
+                                    <Comment.Text>{comment.content}</Comment.Text>
+                                </Comment.Content>
+                            </Comment>
+                        </Segment>
+                        )
+                }
+            }
+            
+            
         })
         
         
@@ -70,7 +85,7 @@ class CommentsContainer extends Component {
                     <Header as="h3" dividing>
                         Comments
                     </Header>
-                    {comments}
+                    {renderComments}
                     <Form reply onSubmit={this.handleOnSubmit}>
                         <Form.TextArea value={this.state.content} name="content" onChange={this.handleOnChange}/>
                         <Button content='Add Comment' labelPosition='left' icon='edit' color="orange" type="submit"/>

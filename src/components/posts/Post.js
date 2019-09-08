@@ -6,15 +6,16 @@ import relativeTime from 'dayjs/plugin/relativeTime'
 class Post extends Component {
 
 
-    componentDidMount(){
-        this.props.resetAppState()
-    }
+    
     
     render() {
-        
         if(this.props === undefined) {return null}
-        const user = this.props.users.find(user => user.id === this.props.post.user_id)
-        console.log(this.props.users)
+        const { post, users, likes, comments, resetAppState } = this.props
+        const user = users.find(user => user.id === post.user_id)
+        const postLikes = likes.filter(like => {
+            return like.post_id === post.id
+        })
+
         
         dayjs.extend(relativeTime)
         return (
@@ -26,17 +27,18 @@ class Post extends Component {
                                 <Image avatar src={user.avatar} size="small" />
                             </Feed.Label>
                             <Feed.Content>
-                                <Feed.Date content={dayjs(this.props.post.created_at).fromNow()}/>
+                                <Feed.Date content={dayjs(post.created_at).fromNow()}/>
                                 <Feed.Summary content={`${user.first_name} ${user.last_name} created a post`} />
-                                <Feed.Extra text content={this.props.post.content} />
+                                
                                 <Feed.Extra images>
                                     
-                                      <img src={this.props.post.img_url} alt={`${user.first_name} ${user.last_name} shared something`} />
+                                      <img src={post.img_url} alt={`${user.first_name} ${user.last_name} shared something`} />
                                     
                                 </Feed.Extra>
+                                <Feed.Extra text content={post.content} />
                                 <Feed.Meta>
                                     <Feed.Like>
-                                        <Icon name='like' color="red" />
+                                        <Icon name='like' color="red" />{postLikes.length}
                                     </Feed.Like>
                                 </Feed.Meta>
                             </Feed.Content>
@@ -44,7 +46,7 @@ class Post extends Component {
                         </Feed.Event>
                     </Segment>
                     <Segment>
-                        {/* <CommentsContainer comments={this.props.comments} floated="left" postId={this.props.post.id} /> */}
+                        <CommentsContainer comments={comments} users={users} resetAppState={resetAppState} floated="left" postId={post.id} />
                     </Segment>
                 </Segment.Group>
             </Segment>       

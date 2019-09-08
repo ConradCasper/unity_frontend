@@ -36,7 +36,7 @@ class PostForm extends Component {
 
         fetch(`http://localhost:3000/api/v1/posts`, request)
         .then(res => res.json())
-        .then(post => this.props.addPost(post))
+        .then(post => this.props.resetAppState())
 
         this.setState({
             content: '',
