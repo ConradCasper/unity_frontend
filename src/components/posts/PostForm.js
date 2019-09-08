@@ -54,10 +54,10 @@ class PostForm extends Component {
         const { first_name, last_name, avatar  } = current_user
         
         return (
-            <Segment>
+            <Segment inverted style={{ "marginTop":"6em" }}>
             <Segment.Group>
                 <Segment.Group horizontal>
-                    <Segment>
+                    <Segment inverted>
                         <Image src={avatar} avatar size='small' />
                         <h4>{`${first_name} ${last_name}`}</h4>
                     </Segment>

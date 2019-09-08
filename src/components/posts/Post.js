@@ -38,9 +38,9 @@ class Post extends Component {
         
         dayjs.extend(relativeTime)
         return (
-            <Segment>
+            <Segment inverted>
                 <Segment.Group>
-                    <Segment>
+                    <Segment inverted>
                         <Feed.Event>
                             <Feed.Label>
                                 <Image avatar src={user.avatar} size="small" />
@@ -51,7 +51,7 @@ class Post extends Component {
                                 
                                 <Feed.Extra images>
                                     
-                                      <img src={post.img_url} alt={`${user.first_name} ${user.last_name} shared something`} />
+                                      <Image src={post.img_url} size="large" centered alt={`${user.first_name} ${user.last_name} shared something`} />
                                     
                                 </Feed.Extra>
                                 <Feed.Extra text content={post.content} />
@@ -64,7 +64,7 @@ class Post extends Component {
                             
                         </Feed.Event>
                     </Segment>
-                    <Segment>
+                    <Segment inverted>
                         <CommentsContainer comments={comments} users={users} resetAppState={resetAppState} floated="left" postId={post.id} />
                     </Segment>
                 </Segment.Group>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Grid, Segment, Image, Form, TextArea, Button, Header } from 'semantic-ui-react';
+import { Grid, Segment, Image, Form, TextArea, Button, Header, Container } from 'semantic-ui-react';
 
 class ProfileForm extends Component {
 
@@ -54,13 +54,13 @@ class ProfileForm extends Component {
         return (
             
             
-            <Grid  inverted textAlign="center" centered container style={{ "marginBottom": "50px", "marginTop":"50px" }} >
-                <Grid.Column width={2}>
-                    <Image src={current_user.avatar} avatar size="tiny" floated="right"  centered verticalAlign="bottom" style={{ "marginTop":"15px" }}/>
+            <Grid  inverted textAlign="center" centered style={{ "marginBottom": "50px", "marginTop":"50px" }} >
+                <Grid.Column width={3}>
+                    <Image src={current_user.avatar} avatar size="tiny" floated="left"   centered verticalAlign="bottom" style={{ "marginTop":"15px" }}/>
                 </Grid.Column>
-                <Grid.Column width={9}>
+                <Grid.Column width={12}>
                     
-                    <Form onSubmit={this.handleOnSubmit}>
+                    <Form onSubmit={this.handleOnSubmit} size="large">
                         <Grid.Row>
                             <TextArea placeholder="What's going on in your world?" name="content" value={this.state.content} onChange={this.handleOnChange}></TextArea>
                         </Grid.Row>
@@ -73,7 +73,7 @@ class ProfileForm extends Component {
                     </Form>
                 </Grid.Column>
             </Grid>
-        
+            
         );
     }
 }

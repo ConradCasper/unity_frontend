@@ -6,6 +6,7 @@ import SignUp from './components/SignUp'
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import Home from './containers/Home'
 import Profile from './components/user/Profile'
+import ErrorBoundary from './components/ErrorBoundary'
 import './index.css'
 
 
@@ -97,16 +98,24 @@ class App extends Component{
   render(){
     return (
       <div className="App" >
-        <NavBar login={this.login} logout={this.logout}/>
-        <Switch>
+          <ErrorBoundary>
+              <NavBar login={this.login} logout={this.logout}/>
+          </ErrorBoundary>
           
-          <Route exact path="/welcome" render={() => ( localStorage.length === 0 ? (<SignUp />)  : (<Redirect to="/home"/>) )}/>
-          <Route path='/home' render={ () => (<Home   posts={this.state.posts} follows={this.state.follows} comments={this.state.comments} likes={this.state.likes} users={this.state.users}  resetAppState={this.resetAppState}/>)} />
-          <Route path='/profile' render={ () => (<Profile posts={this.state.posts} follows={this.state.follows} comments={this.state.comments} likes={this.state.likes} users={this.state.users}  resetAppState={this.resetAppState}/>)} />) } />
+          <Switch>
           
-        </Switch>
-        
-        <Footer />
+              <Route exact path="/welcome" render={() => ( localStorage.length === 0 ? (<ErrorBoundary><SignUp /></ErrorBoundary>)  : (<Redirect to="/home"/>) )}/>
+          
+          
+              <Route path='/home' render={ () => (<ErrorBoundary><Home   posts={this.state.posts} follows={this.state.follows} comments={this.state.comments} likes={this.state.likes} users={this.state.users}  resetAppState={this.resetAppState}/></ErrorBoundary>)} />
+          
+          
+              <Route path='/profile' render={ () => (<ErrorBoundary><Profile posts={this.state.posts} follows={this.state.follows} comments={this.state.comments} likes={this.state.likes} users={this.state.users}  resetAppState={this.resetAppState}/></ErrorBoundary>)} />) } />
+          
+          </Switch>
+          <ErrorBoundary>
+              <Footer />
+          </ErrorBoundary>
         
       </div>
     );

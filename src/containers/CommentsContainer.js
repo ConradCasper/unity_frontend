@@ -61,11 +61,11 @@ class CommentsContainer extends Component {
                             <Comment>
                                 <Comment.Avatar src={users[i].avatar}/>
                                 <Comment.Content>
-                                    <Comment.Author as="a">{`${users[i].first_name} ${users[i].last_name}`}</Comment.Author>
-                                    <Comment.Metadata>
+                                    <Comment.Author color="white" as="a">{`${users[i].first_name} ${users[i].last_name}`}</Comment.Author>
+                                    <Comment.Metadata color="white">
                                         <div>{dayjs(comment.created_at).fromNow()}</div>
                                     </Comment.Metadata>
-                                    <Comment.Text>{comment.content}</Comment.Text>
+                                    <Comment.Text color="white">{comment.content}</Comment.Text>
                                 </Comment.Content>
                             </Comment>
                         </Segment>
@@ -80,14 +80,14 @@ class CommentsContainer extends Component {
 
         dayjs.extend(relativeTime)
         return (
-            <Segment padded="very">
+            <Segment padded="very" inverted>
                 <Comment.Group>
-                    <Header as="h3" dividing>
+                    <Header as="h3" dividing inverted>
                         Comments
                     </Header>
                     {renderComments}
                     <Form reply onSubmit={this.handleOnSubmit}>
-                        <Form.TextArea value={this.state.content} name="content" onChange={this.handleOnChange}/>
+                        <Form.TextArea value={this.state.content} name="content" placeholder="Speak your mind..." onChange={this.handleOnChange}/>
                         <Button content='Add Comment' labelPosition='left' icon='edit' color="orange" type="submit"/>
                     </Form>
                 </Comment.Group>
