@@ -5,10 +5,11 @@ import ProfileFeed from './ProfileFeed';
 
 class ProfileFormAndFeed extends Component {
     render() {
+        const { current_user, resetAppState } = this.props
         return (
-            <Container >
-                <ProfileForm />
-                <ProfileFeed />
+            <Container style={{"marginTop":"4.5em", "width": "80em"}} >
+                <ProfileForm resetAppState={resetAppState} current_user={current_user}/>
+                <ProfileFeed resetAppState={resetAppState} current_user={current_user}/>
             </Container>
         );
     }

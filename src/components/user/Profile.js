@@ -34,7 +34,7 @@ class Profile extends Component {
         return (
             <Container style={{"marginTop":"6.5em", "width": "80em"}} >
                 <ProfileDisplay current_user={this.state.current_user} />
-                <ProfileFormAndFeed current_user={this.state.current_user} />
+                <ProfileFormAndFeed resetAppState={this.props.resetAppState} current_user={this.state.current_user} />
             </Container>
         );
     }
