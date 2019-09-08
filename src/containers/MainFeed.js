@@ -12,6 +12,7 @@ class MainFeed extends Component {
             return follow.follower_id === current_user.id
         })
         const followed_user_posts = this.props.posts.filter(post => {
+            
                 for (let i = 0; i < current_user_follows.length; i++){
                     if(post.user_id === current_user_follows[i].followee_id){
                         return post
@@ -19,6 +20,7 @@ class MainFeed extends Component {
                         return post
                     }
                 }
+            
         })
                 
             

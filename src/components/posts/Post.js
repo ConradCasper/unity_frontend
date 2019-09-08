@@ -5,7 +5,26 @@ import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 class Post extends Component {
 
+    handleLike = () => {
+        const token = localStorage.getItem("jwt")
+        const request = {
+            method: "POST",
+            headers: {
+                "Content-Type":"application/json",
+                "Accept":"applicaiton/json",
+                "Authorization": `Bearer ${token}`
+            },
+            body: JSON.stringify({
+                like: {
+                    post_id: this.props.post.id
+                }
+            })
+        }
 
+        fetch(`http://localhost:3000/api/v1/likes`, request)
+        .then(res => res.json())
+        .then(post => this.props.resetAppState())
+    }
     
     
     render() {
@@ -38,7 +57,7 @@ class Post extends Component {
                                 <Feed.Extra text content={post.content} />
                                 <Feed.Meta>
                                     <Feed.Like>
-                                        <Icon name='like' color="red" />{postLikes.length}
+                                        <Icon name='like' color="red" onClick={this.handleLike}/>{postLikes.length}
                                     </Feed.Like>
                                 </Feed.Meta>
                             </Feed.Content>

@@ -6,9 +6,12 @@ import PostForm from '../components/posts/PostForm'
 class Home extends Component {
 
 
+    
+
+
     render() {
         
-        
+        if(this.props === undefined) { return null }
         return (
             
             <Container style={{"marginTop":"6em", "width": "50em"}}>

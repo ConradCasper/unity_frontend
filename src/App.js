@@ -3,11 +3,11 @@ import './App.css';
 import NavBar from './components/NavBar'
 import Footer from './components/Footer'
 import SignUp from './components/SignUp'
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect, Link, withRouter } from 'react-router-dom';
 import Home from './containers/Home'
 
 
-export default class App extends Component{
+class App extends Component{
   constructor(){
     super()
     this.state = {
@@ -37,6 +37,7 @@ export default class App extends Component{
 
   logout = () => {
     localStorage.clear()
+    this.props.history.push("/welcome")
     this.resetAppState()
   }
 
@@ -94,10 +95,13 @@ export default class App extends Component{
   render(){
     return (
       <div className="App" >
-        <NavBar current_user={this.state.current_user} login={this.login} logout={this.logout}/>
+        <NavBar login={this.login} logout={this.logout}/>
         <Switch>
-          <Route path='/welcome' render={ () => (<SignUp controller={this.controller} />) }/>
-          <Route path='/home' render={ () => (<Home   posts={this.state.posts} follows={this.state.follows} comments={this.state.comments} likes={this.state.likes} users={this.state.users}  resetAppState={this.resetAppState}/>)} />
+          
+          <Route exact path="/welcome" render={() => ( localStorage.length === 0 ? (<SignUp controller={this.controller} />)  : (<Redirect to="/home"/>) )}/>
+          <Route path='/home' render={ () => (<Home controller={this.controller}  posts={this.state.posts} follows={this.state.follows} comments={this.state.comments} likes={this.state.likes} users={this.state.users}  resetAppState={this.resetAppState}/>)} />
+          {/* <Route path='/welcome' render={ () => (<SignUp controller={this.controller} />) } /> */}
+          
         </Switch>
         
         <Footer />
@@ -109,3 +113,4 @@ export default class App extends Component{
       
 
 
+export default withRouter(App);

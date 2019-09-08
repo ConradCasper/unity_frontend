@@ -48,7 +48,7 @@ class CommentsContainer extends Component {
 
 
     render() {
-        const { users, comments, postId, resetAppState } = this.props
+        const { users, comments, postId } = this.props
         const postComments = comments.filter(comment => {
           return  comment.post_id === postId
         })
