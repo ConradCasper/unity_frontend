@@ -11,3 +11,31 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.profileBackground {
+  z-index: 0;
+  position: relative;
+}
+
+
+.profileImg {
+  z-index: 1;
+  position: relative;
+  top: -150px;
+  left: 3px;
+}
+
+.profileName {
+  z-index: 1;
+  position: relative;
+  top: -250px;
+  left: -240px;
+}
+
+.profileFollow {
+  z-index: 1;
+  position: relative;
+  top: -295px;
+  left: 450px;
+}
+

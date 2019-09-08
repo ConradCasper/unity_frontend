@@ -3,8 +3,10 @@ import './App.css';
 import NavBar from './components/NavBar'
 import Footer from './components/Footer'
 import SignUp from './components/SignUp'
-import { Switch, Route, Redirect, Link, withRouter } from 'react-router-dom';
+import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import Home from './containers/Home'
+import Profile from './components/user/Profile'
+import './index.css'
 
 
 class App extends Component{
@@ -98,9 +100,9 @@ class App extends Component{
         <NavBar login={this.login} logout={this.logout}/>
         <Switch>
           
-          <Route exact path="/welcome" render={() => ( localStorage.length === 0 ? (<SignUp controller={this.controller} />)  : (<Redirect to="/home"/>) )}/>
-          <Route path='/home' render={ () => (<Home controller={this.controller}  posts={this.state.posts} follows={this.state.follows} comments={this.state.comments} likes={this.state.likes} users={this.state.users}  resetAppState={this.resetAppState}/>)} />
-          {/* <Route path='/welcome' render={ () => (<SignUp controller={this.controller} />) } /> */}
+          <Route exact path="/welcome" render={() => ( localStorage.length === 0 ? (<SignUp />)  : (<Redirect to="/home"/>) )}/>
+          <Route path='/home' render={ () => (<Home   posts={this.state.posts} follows={this.state.follows} comments={this.state.comments} likes={this.state.likes} users={this.state.users}  resetAppState={this.resetAppState}/>)} />
+          <Route path='/profile' render={ () => (<Profile posts={this.state.posts} follows={this.state.follows} comments={this.state.comments} likes={this.state.likes} users={this.state.users}  resetAppState={this.resetAppState}/>)} />) } />
           
         </Switch>
         

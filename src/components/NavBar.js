@@ -76,8 +76,8 @@ class NavBar extends Component {
                                 <Menu.Item>
                                   <Link to='/home'> Home </Link>  
                                 </Menu.Item>
-                                <Menu.Item as="a">
-                                    Profile
+                                <Menu.Item >
+                                    <Link to='/profile'> Profile </Link>
                                 </Menu.Item>
                                 <Menu.Item as="a">
                                     Edit Profile

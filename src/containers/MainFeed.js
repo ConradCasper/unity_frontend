@@ -23,17 +23,12 @@ class MainFeed extends Component {
             
         })
                 
-            
-            
-        
-
-
-
-        
         const renderPosts = followed_user_posts.map(post => {
             
             return <Post key={post.id} post={post} users={this.props.users} likes={this.props.likes} comments={this.props.comments} resetAppState={this.props.resetAppState} />
+            
         })
+            
         return (
            
             <Feed className="MainFeed">
@@ -44,3 +39,8 @@ class MainFeed extends Component {
 }
 
 export default MainFeed;
+        
+
+
+
+        
