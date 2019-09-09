@@ -6,7 +6,6 @@ import SignUp from './components/SignUp'
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import Home from './containers/Home'
 import Profile from './components/user/Profile'
-// import ErrorBoundary from './components/ErrorBoundary'
 import './index.css'
 
 

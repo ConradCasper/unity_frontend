@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Form, TextArea, Image, Segment, Button } from 'semantic-ui-react';
+import ErrorBoundary from '../ErrorBoundary'
 
 
 class PostForm extends Component {
@@ -54,23 +55,25 @@ class PostForm extends Component {
         const { first_name, last_name, avatar  } = current_user
         
         return (
-            <Segment inverted style={{ "marginTop":"6em" }}>
-            <Segment.Group>
-                <Segment.Group horizontal>
-                    <Segment inverted>
-                        <Image src={avatar} avatar size='small' />
-                        <h4>{`${first_name} ${last_name}`}</h4>
-                    </Segment>
-                    <Segment>
-                        <Form onSubmit={this.handleOnSubmit}>
-                            <TextArea placeholder="What's going on in your world today?" name="content" value={this.state.content} onChange={this.handleOnChange}/>
-                            <Form.Input style={{ "marginTop":"1em" }} placeholder="Add an image url..." name="img_url" value={this.state.img_url} onChange={this.handleOnChange}/>
-                            <Button type="submit" style={{ "marginTop": "1em" }} color="orange">Make a New Post</Button>
-                        </Form>
-                    </Segment>
-                </Segment.Group>
-            </Segment.Group>
-            </Segment>
+            <ErrorBoundary>
+                <Segment inverted style={{ "marginTop":"6em" }}>
+                    <Segment.Group>
+                        <Segment.Group horizontal>
+                            <Segment inverted>
+                                <Image src={avatar} avatar size='small' />
+                                <h4>{`${first_name} ${last_name}`}</h4>
+                            </Segment>
+                            <Segment>
+                                <Form onSubmit={this.handleOnSubmit}>
+                                    <TextArea placeholder="What's going on in your world today?" name="content" value={this.state.content} onChange={this.handleOnChange}/>
+                                    <Form.Input style={{ "marginTop":"1em" }} placeholder="Add an image url..." name="img_url" value={this.state.img_url} onChange={this.handleOnChange}/>
+                                    <Button type="submit" style={{ "marginTop": "1em" }} color="orange">Make a New Post</Button>
+                                </Form>
+                            </Segment>
+                        </Segment.Group>
+                    </Segment.Group>
+                </Segment>
+            </ErrorBoundary>
         );
     }
 }

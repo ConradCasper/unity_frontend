@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Container } from 'semantic-ui-react'
 import MainFeed from './MainFeed'
 import PostForm from '../components/posts/PostForm'
+import ErrorBoundary from '../components/ErrorBoundary'
 
 class Home extends Component {
 
@@ -16,8 +17,12 @@ class Home extends Component {
         return (
             
             <Container style={{"marginTop":"6em", "width": "50em"}}>
-                <PostForm style={{ "marginTop":"4em" }}  resetAppState={resetAppState}/>
-                <MainFeed posts={posts} comments={comments} users={users} follows={follows} likes={likes} resetAppState={resetAppState}/>
+                <ErrorBoundary>
+                    <PostForm style={{ "marginTop":"4em" }}  resetAppState={resetAppState}/>
+                </ErrorBoundary>
+                <ErrorBoundary>
+                    <MainFeed posts={posts} comments={comments} users={users} follows={follows} likes={likes} resetAppState={resetAppState}/>
+                </ErrorBoundary>
             </Container>
         );
     }

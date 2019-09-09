@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Feed } from 'semantic-ui-react'
 import Post from '../posts/Post'
+import ErrorBoundary from '../ErrorBoundary'
 
 class ProfileFeed extends Component {
     render() {
@@ -9,12 +10,14 @@ class ProfileFeed extends Component {
             return post.user_id === current_user.id
         })
         const renderPosts = current_user_posts.map(post => {
-            return <Post key={post.id} post={post} users={users} likes={likes} comments={comments} resetAppState={resetAppState} />
+            return <ErrorBoundary><Post key={post.id} post={post} users={users} likes={likes} comments={comments} resetAppState={resetAppState} /></ErrorBoundary>
         })
         return (
-            <Feed  className="MainFeed">
-                {renderPosts}
-            </Feed>
+            <ErrorBoundary>
+                <Feed  className="MainFeed">
+                    {renderPosts}
+                </Feed>
+            </ErrorBoundary>
         );
     }
 }

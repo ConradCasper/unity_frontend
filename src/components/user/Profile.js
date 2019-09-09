@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Container } from 'semantic-ui-react';
 import ProfileDisplay from './ProfileDisplay'
 import ProfileFormAndFeed from './ProfileFormAndFeed'
+import ErrorBoundary from '../ErrorBoundary'
 
 class Profile extends Component {
 
@@ -33,9 +34,14 @@ class Profile extends Component {
     render() {
         const { users, follows, comments, likes, posts, resetAppState } = this.props
         return (
+            
             <Container style={{"marginTop":"6.5em", "width": "80em"}} >
-                <ProfileDisplay current_user={this.state.current_user} follows={follows}/>
-                <ProfileFormAndFeed resetAppState={resetAppState} current_user={this.state.current_user} users={users} follows={follows} comments={comments} likes={likes} posts={posts}/>
+                <ErrorBoundary>
+                    <ProfileDisplay current_user={this.state.current_user} follows={follows}/>
+                </ErrorBoundary>
+                <ErrorBoundary>
+                    <ProfileFormAndFeed resetAppState={resetAppState} current_user={this.state.current_user} users={users} follows={follows} comments={comments} likes={likes} posts={posts}/>
+                </ErrorBoundary>
             </Container>
         );
     }
