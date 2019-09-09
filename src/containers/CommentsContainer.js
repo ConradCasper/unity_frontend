@@ -53,11 +53,13 @@ class CommentsContainer extends Component {
           return  comment.post_id === postId
         })
         
-        const renderComments = postComments.forEach(comment => {
-            let comments = []
+        const userComments = []
+
+        postComments.forEach(comment => {
+            
             for (let i = 0; i < users.length; i++){
                 if(comment.user_id === users[i].id){
-                    comments.push(
+                    userComments.push(
                         <Segment key={comment.id}>
                             <Comment>
                                 <Comment.Avatar src={users[i].avatar}/>
@@ -73,7 +75,7 @@ class CommentsContainer extends Component {
                     )
                 }
             }
-            return comments
+        
         })
             
             
@@ -87,7 +89,7 @@ class CommentsContainer extends Component {
                     <Header as="h3" dividing inverted>
                         Comments
                     </Header>
-                    {renderComments}
+                    {userComments}
                     <Form reply onSubmit={this.handleOnSubmit}>
                         <Form.TextArea value={this.state.content} name="content" placeholder="Speak your mind..." onChange={this.handleOnChange}/>
                         <Button content='Add Comment' labelPosition='left' icon='edit' color="orange" type="submit"/>
