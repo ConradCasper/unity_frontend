@@ -6,7 +6,7 @@ import SignUp from './components/SignUp'
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import Home from './containers/Home'
 import Profile from './components/user/Profile'
-import ErrorBoundary from './components/ErrorBoundary'
+// import ErrorBoundary from './components/ErrorBoundary'
 import './index.css'
 
 
@@ -48,30 +48,35 @@ class App extends Component{
   fetchPosts = () => {
     fetch(`http://localhost:3000/api/v1/posts`, { signal: this.controller.signal })
     .then(res => res.json())
+    // .then(data => console.log(data.posts))
     .then(data => this.setState({posts: data.posts}))
   }
 
   fetchComments = () => {
     fetch(`http://localhost:3000/api/v1/comments`, { signal: this.controller.signal })
     .then(res => res.json())
+    // .then(data => console.log(data.comments))
     .then(data => this.setState({comments: data.comments}))
   }
 
   fetchLikes = () => {
     fetch(`http://localhost:3000/api/v1/likes`, { signal: this.controller.signal })
     .then(res => res.json())
+    // .then(data => console.log(data.likes))
     .then(data => this.setState({likes: data.likes}))
   }
 
   fetchUsers = () => {
     fetch(`http://localhost:3000/api/v1/users`, { signal: this.controller.signal })
     .then(res => res.json())
+    // .then(data => console.log(data.users))
     .then(data => this.setState({users: data.users}))
   }
 
   fetchFollows = () => {
     fetch(`http://localhost:3000/api/v1/follows`, { signal: this.controller.signal })
     .then(res => res.json())
+    // .then(data => console.log(data.follows))
     .then(data => this.setState({follows: data.follows}))
   }
 
@@ -98,25 +103,13 @@ class App extends Component{
   render(){
     return (
       <div className="App" >
-          <ErrorBoundary>
-              <NavBar login={this.login} logout={this.logout}/>
-          </ErrorBoundary>
-          
-          <Switch>
-          
-              <Route exact path="/welcome" render={() => ( localStorage.length === 0 ? (<ErrorBoundary><SignUp /></ErrorBoundary>)  : (<Redirect to="/home"/>) )}/>
-          
-          
-              <Route path='/home' render={ () => (<ErrorBoundary><Home   posts={this.state.posts} follows={this.state.follows} comments={this.state.comments} likes={this.state.likes} users={this.state.users}  resetAppState={this.resetAppState}/></ErrorBoundary>)} />
-          
-          
-              <Route path='/profile' render={ () => (<ErrorBoundary><Profile posts={this.state.posts} follows={this.state.follows} comments={this.state.comments} likes={this.state.likes} users={this.state.users}  resetAppState={this.resetAppState}/></ErrorBoundary>)} />) } />
-          
-          </Switch>
-          <ErrorBoundary>
+          <NavBar login={this.login} logout={this.logout}/>
+              <Switch>
+                  <Route exact path="/welcome" render={() => ( localStorage.length === 0 ? (<SignUp />)  : (<Redirect to="/home"/>) )}/>
+                  <Route path='/home' render={ () => (<Home posts={this.state.posts} follows={this.state.follows} comments={this.state.comments} likes={this.state.likes} users={this.state.users}  resetAppState={this.resetAppState}/>)} />
+                  <Route path='/profile' render={ () => (<Profile posts={this.state.posts} follows={this.state.follows} comments={this.state.comments} likes={this.state.likes} users={this.state.users}  resetAppState={this.resetAppState}/>)} />) } />
+              </Switch>
               <Footer />
-          </ErrorBoundary>
-        
       </div>
     );
   }
@@ -125,3 +118,15 @@ class App extends Component{
 
 
 export default withRouter(App);
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+        

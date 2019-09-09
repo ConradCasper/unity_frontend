@@ -53,10 +53,11 @@ class CommentsContainer extends Component {
           return  comment.post_id === postId
         })
         
-        const renderComments = postComments.map(comment => {
+        const renderComments = postComments.forEach(comment => {
+            let comments = []
             for (let i = 0; i < users.length; i++){
                 if(comment.user_id === users[i].id){
-                    return (
+                    comments.push(
                         <Segment key={comment.id}>
                             <Comment>
                                 <Comment.Avatar src={users[i].avatar}/>
@@ -69,12 +70,13 @@ class CommentsContainer extends Component {
                                 </Comment.Content>
                             </Comment>
                         </Segment>
-                        )
+                    )
                 }
             }
-            
-            
+            return comments
         })
+            
+            
         
         
 

@@ -4,28 +4,43 @@ import Post from '../components/posts/Post'
 
 
 class MainFeed extends Component {
+
+    
     
     render() {
-
+        if(this.props === undefined) { return null }
+        // check
+        const { likes, comments, users, posts, follows, resetAppState } = this.props
+        // check
         const current_user = JSON.parse(localStorage.getItem("current_user"))
-        const current_user_follows = this.props.follows.filter(follow => {
-            return follow.follower_id === current_user.id
+        // check
+        const current_user_follows = follows.filter(follow => follow.follower_id === current_user.id) 
+        // works now
+        const current_user_posts = [] 
+        const followed_user_posts = []
+
+        posts.forEach(post => {
+            if(post.user_id === current_user.id){
+                current_user_posts.push(post)
+            }
         })
-        const followed_user_posts = this.props.posts.filter(post => {
-            
-                for (let i = 0; i < current_user_follows.length; i++){
-                    if(post.user_id === current_user_follows[i].followee_id){
-                        return post
-                    } else if(post.user_id === current_user.id){
-                        return post
-                    }
+
+        posts.forEach(post => {
+            current_user_follows.forEach(follow =>{
+                if(post.user_id === follow.followee_id){
+                    followed_user_posts.push(post)
                 }
-            
+            }) 
         })
-                
-        const renderPosts = followed_user_posts.map(post => {
+
+        const wholeFeed = [...current_user_posts, ...followed_user_posts]
+        const sortedFeed = wholeFeed.sort( (a, b) => {
+            return b.id - a.id
+        })
+        
+        const renderPosts = sortedFeed.map(post => {
             
-            return <Post key={post.id} post={post} users={this.props.users} likes={this.props.likes} comments={this.props.comments} resetAppState={this.props.resetAppState} />
+            return <Post key={post.id} post={post} users={users} likes={likes} comments={comments} resetAppState={resetAppState} />
             
         })
             
@@ -39,6 +54,28 @@ class MainFeed extends Component {
 }
 
 export default MainFeed;
+
+
+
+        
+        
+
+            
+        
+            
+                   
+               
+        
+
+        
+            
+            
+                    
+                    
+                    
+                    
+                
+                
         
 
 
