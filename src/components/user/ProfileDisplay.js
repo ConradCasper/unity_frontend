@@ -1,15 +1,18 @@
 import React, { Component } from 'react';
-import { Container, Segment, Image, Header, Button, Grid } from 'semantic-ui-react';
+import { Container, Segment, Image, Header, Button, Grid, Modal } from 'semantic-ui-react';
 import ErrorBoundary from '../ErrorBoundary'
+import ModalProfileEditForm from './ModalProfileEditForm'
 
 
 class ProfileDisplay extends Component {
 
-    
+    UNSAFE_componentWillReceiveProps(newProps){
+        console.log("profile updated successfully!")
+    }
 
 
     render() {
-        const { current_user } = this.props
+        const { current_user, resetAppState, fetchProfile } = this.props
         return (
             <ErrorBoundary>
                 <Container style={{ "width": "80em", "marginBottom": "5em"}} fluid>
@@ -18,6 +21,12 @@ class ProfileDisplay extends Component {
                     <Image src={current_user.avatar} rounded size="small"  className="profileImg" />
                     <Header as='h2' className="profileName" inverted>{`${current_user.first_name} ${current_user.last_name}`}</Header>
                     <Button className="profileFollow" icon="add user" size="huge" content="Follow" inverted></Button>
+                    <Modal trigger={<Button className="editPro" icon='edit' size="medium" content="Edit Profile" color="orange" inverted></Button>} closeIcon>
+                        <Modal.Header>Edit Your Profile</Modal.Header>
+                        <Modal.Content>
+                            <ModalProfileEditForm current_user={current_user} fetchProfile={fetchProfile} resetAppState={resetAppState}/>
+                        </Modal.Content>
+                    </Modal>
                     <Grid columns={3} divided inverted style={{"marginTop": "-19.5em"}}>
                         <Grid.Row stretched>
                             <Grid.Column>

@@ -10,7 +10,7 @@ class ProfileFeed extends Component {
             return post.user_id === current_user.id
         })
         const renderPosts = current_user_posts.map(post => {
-            return <ErrorBoundary><Post key={post.id} post={post} users={users} likes={likes} comments={comments} resetAppState={resetAppState} /></ErrorBoundary>
+            return <ErrorBoundary key={post.id}><Post key={post.id} post={post} users={users} likes={likes} comments={comments} resetAppState={resetAppState} /></ErrorBoundary>
         })
         return (
             <ErrorBoundary>

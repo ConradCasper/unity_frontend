@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Grid, Segment, Image, Form, TextArea, Button, Header, Container } from 'semantic-ui-react';
+import { Grid,  Image, Form, TextArea, Button } from 'semantic-ui-react';
 import ErrorBoundary from '../ErrorBoundary'
 
 class ProfileForm extends Component {

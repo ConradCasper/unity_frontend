@@ -79,9 +79,7 @@ class NavBar extends Component {
                                 <Menu.Item >
                                     <Link to='/profile'> Profile </Link>
                                 </Menu.Item>
-                                <Menu.Item as="a">
-                                    Edit Profile
-                                </Menu.Item>
+                    
                         
                         <Menu.Item position='right'>
                             

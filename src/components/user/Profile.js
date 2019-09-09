@@ -37,7 +37,7 @@ class Profile extends Component {
             
             <Container style={{"marginTop":"6.5em", "width": "80em"}} >
                 <ErrorBoundary>
-                    <ProfileDisplay current_user={this.state.current_user} follows={follows}/>
+                    <ProfileDisplay current_user={this.state.current_user} follows={follows} fetchProfile={this.fetchProfile} resetAppState={resetAppState}/>
                 </ErrorBoundary>
                 <ErrorBoundary>
                     <ProfileFormAndFeed resetAppState={resetAppState} current_user={this.state.current_user} users={users} follows={follows} comments={comments} likes={likes} posts={posts}/>

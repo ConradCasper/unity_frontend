@@ -39,3 +39,10 @@ code {
   left: 450px;
 }
 
+.editPro {
+  z-index: 1;
+  position: relative;
+  top: -740px;
+  left: 380px;
+}
+
