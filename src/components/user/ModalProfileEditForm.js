@@ -43,10 +43,8 @@ class ModalProfileEditForm extends Component {
 
         fetch(`http://localhost:3000/api/v1/users/${id}`, request)
         .then(res => res.json())
-        .then(data => localStorage.setItem("current_user", JSON.stringify(data.user)))
-        .then(this.props.fetchProfile())
-        .then(setTimeout(this.props.resetAppState(), 5000))
-        .then(alert("You successfully updated your profile!"))
+        .then(data => this.props.resetCurrentUser(data.user))
+        
             
         
     }

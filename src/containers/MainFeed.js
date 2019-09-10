@@ -11,9 +11,9 @@ class MainFeed extends Component {
     render() {
         if(this.props === undefined) { return null }
         // check
-        const { likes, comments, users, posts, follows, resetAppState } = this.props
-        // check
-        const current_user = JSON.parse(localStorage.getItem("current_user"))
+        const { current_user, likes, comments, users, posts, follows, resetAppState } = this.props
+    
+        
         // check
         const current_user_follows = follows.filter(follow => follow.follower_id === current_user.id) 
         // works now

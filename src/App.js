@@ -13,6 +13,7 @@ class App extends Component{
   constructor(){
     super()
     this.state = {
+      current_user: null,
       posts: [],
       comments: [],
       likes: [],
@@ -33,14 +34,27 @@ class App extends Component{
   }
 
   login = user => {
-    localStorage.setItem("current_user", JSON.stringify(user))
+    this.setState({
+      current_user: user
+    })
     this.resetAppState()
   }
 
   logout = () => {
-    localStorage.clear()
+    this.setState({
+      ...this.state, current_user: null
+    })
     this.props.history.push("/welcome")
     this.resetAppState()
+  }
+
+  resetCurrentUser = user => {
+    
+      this.setState({
+        ...this.state, current_user: user
+      })
+    
+
   }
 
 
@@ -102,11 +116,11 @@ class App extends Component{
   render(){
     return (
       <div className="App" >
-          <NavBar login={this.login} logout={this.logout}/>
+          <NavBar login={this.login} logout={this.logout} current_user={this.state.current_user}/>
               <Switch>
-                  <Route exact path="/welcome" render={() => ( localStorage.length === 0 ? (<SignUp />)  : (<Redirect to="/home"/>) )}/>
-                  <Route path='/home' render={ () => (<Home posts={this.state.posts} follows={this.state.follows} comments={this.state.comments} likes={this.state.likes} users={this.state.users}  resetAppState={this.resetAppState}/>)} />
-                  <Route path='/profile' render={ () => (<Profile posts={this.state.posts} follows={this.state.follows} comments={this.state.comments} likes={this.state.likes} users={this.state.users}  resetAppState={this.resetAppState}/>)} />) } />
+                  <Route exact path="/welcome" render={() => ( this.state.current_user === null ? (<SignUp />)  : (<Redirect to="/home"/>) )}/>
+                  <Route path='/home' render={ () => (<Home posts={this.state.posts} current_user={this.state.current_user} follows={this.state.follows} comments={this.state.comments} likes={this.state.likes} users={this.state.users}  resetAppState={this.resetAppState}/>)} />
+                  <Route path='/profile' render={ () => (<Profile posts={this.state.posts} current_user={this.state.current_user} resetCurrentUser={this.resetCurrentUser} follows={this.state.follows} comments={this.state.comments} likes={this.state.likes} users={this.state.users}  resetAppState={this.resetAppState}/>)} />) } />
               </Switch>
               <Footer />
       </div>

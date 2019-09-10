@@ -3,6 +3,7 @@ import { Feed, Icon, Segment, Image } from 'semantic-ui-react'
 import CommentsContainer from '../../containers/CommentsContainer'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
+// doesn't seem to need access to current user
 class Post extends Component {
 
     handleLike = () => {

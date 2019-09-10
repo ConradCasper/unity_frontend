@@ -51,7 +51,7 @@ class PostForm extends Component {
 
 
     render() {
-        const current_user = JSON.parse(localStorage.getItem("current_user"))
+        const { current_user } = this.props
         const { first_name, last_name, avatar  } = current_user
         
         return (

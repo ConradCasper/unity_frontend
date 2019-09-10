@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Button, Comment, Form, Header, Segment } from 'semantic-ui-react'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
-
+// doesn't seem to need access to current user
 class CommentsContainer extends Component {
     constructor(props){
         super(props)

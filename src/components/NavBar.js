@@ -57,9 +57,10 @@ class NavBar extends Component {
     }
 
     render() {
+        const { current_user } = this.props
         return (
             <div>
-            {(localStorage.getItem("current_user")) ? 
+            {(current_user !== null) ? 
             
                 <Container>
                     <Menu fixed='top' inverted>
