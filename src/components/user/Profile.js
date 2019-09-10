@@ -22,11 +22,15 @@ class Profile extends Component {
             }
         })
         .then(res => res.json())
-        .then(data => this.setState({current_user: data.user}))
+        .then(data => {
+            this.setState({current_user: data.user}) 
+           setTimeout(localStorage.setItem("current_user", JSON.stringify(data.user)), 3000)}
+        )
     }
+            
 
 
-    componentDidMount(){
+    componentDidMount() {
         this.fetchProfile()
     }
     
