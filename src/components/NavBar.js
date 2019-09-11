@@ -67,7 +67,7 @@ class NavBar extends Component {
 
                         <Menu.Item as='a' header>
                             <Image size='mini' src={logo} style={{ marginRight: '1.5em' }} />
-                            <h3 style={{ "paddingBottom": "1.2em" }}>Unity</h3>
+                            <Link to='/home'><h3 >Unity</h3></Link>
                         </Menu.Item>
                         
                             

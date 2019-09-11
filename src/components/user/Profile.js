@@ -15,7 +15,7 @@ class Profile extends Component {
     
 
     render() {
-        const { user, users, follows, comments, likes, posts, resetAppState, resetCurrentUser } = this.props
+        const { user, users, follows, comments, likes, posts, resetAppState } = this.props
         return (
             
             <Container style={{"marginTop":"6.5em", "width": "80em"}} >
