@@ -6,9 +6,9 @@ import {
     Form,
     Button,
     Image,
-    Menu,
-    Search
+    Menu
 } from 'semantic-ui-react'
+    
 
 
 class NavBar extends Component {
@@ -69,9 +69,7 @@ class NavBar extends Component {
                             <Image size='mini' src={logo} style={{ marginRight: '1.5em' }} />
                             <h3 style={{ "paddingBottom": "1.2em" }}>Unity</h3>
                         </Menu.Item>
-                        <Menu.Item>
-                        <Search/>
-                        </Menu.Item>
+                        
                             
                         
                                 <Menu.Item>
@@ -80,7 +78,9 @@ class NavBar extends Component {
                                 <Menu.Item >
                                     <Link to='/profile'> Profile </Link>
                                 </Menu.Item>
-                    
+                                <Menu.Item>
+                                    <Link to='/search'> Search Users</Link>
+                                </Menu.Item>
                         
                         <Menu.Item position='right'>
                             

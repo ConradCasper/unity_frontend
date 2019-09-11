@@ -5,7 +5,9 @@ import Footer from './components/Footer'
 import SignUp from './components/SignUp'
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import Home from './containers/Home'
-import Profile from './components/user/Profile'
+import Profile from './components/current_user/Profile'
+import SearchUsers from './containers/SearchUsers'
+import  UserProfile  from './components/user/Profile'
 import './index.css'
 
 
@@ -46,6 +48,7 @@ class App extends Component{
     })
     this.props.history.push("/welcome")
     this.resetAppState()
+    localStorage.clear()
   }
 
   resetCurrentUser = user => {
@@ -105,8 +108,12 @@ class App extends Component{
 
 
 
-
-    
+ showUser = id => {
+   console.log("inside of showUser")
+   let u =  this.state.users.filter(user => (user.id === Number(id)))
+   console.log(u[0])
+   return u[0]
+ }
 
   
 
@@ -119,8 +126,12 @@ class App extends Component{
           <NavBar login={this.login} logout={this.logout} current_user={this.state.current_user}/>
               <Switch>
                   <Route exact path="/welcome" render={() => ( this.state.current_user === null ? (<SignUp />)  : (<Redirect to="/home"/>) )}/>
-                  <Route path='/home' render={ () => (<Home posts={this.state.posts} current_user={this.state.current_user} follows={this.state.follows} comments={this.state.comments} likes={this.state.likes} users={this.state.users}  resetAppState={this.resetAppState}/>)} />
-                  <Route path='/profile' render={ () => (<Profile posts={this.state.posts} current_user={this.state.current_user} resetCurrentUser={this.resetCurrentUser} follows={this.state.follows} comments={this.state.comments} likes={this.state.likes} users={this.state.users}  resetAppState={this.resetAppState}/>)} />) } />
+                  <Route exact path='/home' render={ () => (<Home posts={this.state.posts} current_user={this.state.current_user} follows={this.state.follows} comments={this.state.comments} likes={this.state.likes} users={this.state.users}  resetAppState={this.resetAppState}/>)} />
+                  <Route exact path='/profile' render={ () => (<Profile posts={this.state.posts} current_user={this.state.current_user} resetCurrentUser={this.resetCurrentUser} follows={this.state.follows} comments={this.state.comments} likes={this.state.likes} users={this.state.users}  resetAppState={this.resetAppState}/>)} />) } />
+                  <Route exact path='/search' render={ () => (<SearchUsers users={this.state.users} />) } />
+                  <Route exact path='/user/:id' render={({ match }) => {
+                    return <UserProfile user={this.showUser(match.params.id)}  users={this.state.users} follows={this.state.follows} posts={this.state.posts} comments={this.state.comments} likes={this.state.likes} />
+                  }} />
               </Switch>
               <Footer />
       </div>

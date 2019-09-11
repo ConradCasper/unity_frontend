@@ -56,7 +56,7 @@ class PostForm extends Component {
         
         return (
             <ErrorBoundary>
-                <Segment inverted style={{ "marginTop":"6em" }}>
+                <Segment inverted >
                     <Segment.Group>
                         <Segment.Group horizontal>
                             <Segment inverted>
