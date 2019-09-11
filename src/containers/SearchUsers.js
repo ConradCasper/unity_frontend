@@ -1,10 +1,29 @@
 import React, { Component } from 'react';
-import { Search, Grid, Card, Container, Image, Icon } from 'semantic-ui-react'
+import { Input, Grid, Card, Container, Image, Icon, Segment } from 'semantic-ui-react'
 import { Link } from 'react-router-dom';
 class SearchUsers extends Component {
+    constructor(props){
+        super(props)
+        this.state ={
+            users: props.users,
+            filter: ''
+        }
+    }
+
+    handleFilter = e => {
+        this.setState({
+            filter: e.target.value
+        })
+    }
+
+
+
     render() {
         const { users } = this.props
-        const renderUsers = users.map(user => {
+        const filteredUsers = users.filter(user => {
+            return user.first_name.toLowerCase().startsWith(this.state.filter.toLowerCase())
+        })
+        const renderUsers = filteredUsers.map(user => {
             return (
                 
                 <Card key={user.id} color='teal' style={{ "marginRight":"10px", "marginLeft":"10px" }}>
@@ -33,11 +52,22 @@ class SearchUsers extends Component {
                         
         return (
             <Container fluid style={{ "marginTop":"6.5em", "width": "400em", "paddingLeft":"45px" }} textAlign="center" >
+                
                 <Grid>
-                    {renderUsers}
+                    <Grid.Row>
+                        <Segment inverted circular style={{ "width":"600px", "left":"625px", "marginTop":"50px", "marginBottom":"100px"}}>
+                            <Input icon="users" name="filter" value={this.state.filter} onChange={this.handleFilter} iconPosition="left" placeholder="Search Users..." style={{ "width":"400px" }} />
+                        </Segment>
+                    </Grid.Row>
+                    <Grid.Row>
+                        {renderUsers}
+                    </Grid.Row>
                 </Grid>
             </Container>
         );
+                    
+                        
+                
     }
 }
 

@@ -38,7 +38,10 @@ export default class SignUp extends Component {
 
         fetch(`http://localhost:3000/api/v1/users`, requestObject)
         .then(res => res.json())
-        .then(data => console.log(data))
+        .then(data => {
+            localStorage.setItem("jwt", data.jwt)
+            this.props.login(data.user)
+        })
 
         this.setState({
             first_name: '',

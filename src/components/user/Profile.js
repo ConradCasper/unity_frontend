@@ -15,15 +15,17 @@ class Profile extends Component {
     
 
     render() {
-        const { user, users, follows, comments, likes, posts, resetAppState } = this.props
+        const { current_user, user, users, follows, comments, likes, posts, resetAppState } = this.props
         return (
             
             <Container style={{"marginTop":"6.5em", "width": "80em"}} >
                 <ErrorBoundary>
-                    <ProfileDisplay user={user} follows={follows} resetAppState={resetAppState} />
+                    <ProfileDisplay current_user={current_user} user={user} follows={follows} resetAppState={resetAppState} />
                 </ErrorBoundary>
                 <ErrorBoundary>
-                    <ProfileFeed resetAppState={resetAppState} user={user} users={users} follows={follows} comments={comments} likes={likes} posts={posts}/>
+                    <Container style={{"marginTop":"6.5em", "width": "55em"}} textAlign="center" >
+                        <ProfileFeed resetAppState={resetAppState} current_user={current_user} user={user} users={users} follows={follows} comments={comments} likes={likes} posts={posts}/>
+                    </Container>
                 </ErrorBoundary>
             </Container>
         );

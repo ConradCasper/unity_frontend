@@ -19,7 +19,7 @@ class ProfileDisplay extends Component {
                     <Image src={current_user.background_img}  className="profileBackground" fluid/>
                     <Image src={current_user.avatar} rounded size="small"  className="profileImg" />
                     <Header as='h2' className="profileName" inverted>{`${current_user.first_name} ${current_user.last_name}`}</Header>
-                    <Button className="profileFollow" icon="add user" size="huge" content="Follow" inverted></Button>
+                    
                     <Modal trigger={<Button className="editPro" icon='edit' size="medium" content="Edit Profile" color="orange" inverted></Button>} closeIcon>
                         <Modal.Header>Edit Your Profile</Modal.Header>
                         <Modal.Content>
