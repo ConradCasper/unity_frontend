@@ -44,11 +44,25 @@ class CommentsContainer extends Component {
     }
 
 
+    handleDelete = commentId => {
+        const token = localStorage.getItem("jwt")
+        const request = {
+            method: "DELETE",
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        }
+        fetch(`http://localhost:3000/api/v1/comments/${commentId}`, request)
+        .then(res => res.json())
+        .then(comment => this.props.resetAppState())
+    }
+
+
 
 
 
     render() {
-        const { users, comments, postId } = this.props
+        const { users, comments, postId, current_user } = this.props
         const postComments = comments.filter(comment => {
           return  comment.post_id === postId
         })
@@ -69,6 +83,14 @@ class CommentsContainer extends Component {
                                         <div>{dayjs(comment.created_at).fromNow()}</div>
                                     </Comment.Metadata>
                                     <Comment.Text color="white">{comment.content}</Comment.Text>
+                                    {(current_user.id === comment.user_id) ? 
+                                        <Comment.Actions>
+                                            <Comment.Action onClick={this.handleDelete(comment.id)}>Delete</Comment.Action>
+                                        </Comment.Actions>
+                                        :
+                                        null
+                                    }
+                                    
                                 </Comment.Content>
                             </Comment>
                         </Segment>

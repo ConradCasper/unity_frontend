@@ -66,9 +66,9 @@ class ProfileDisplay extends Component {
         
         return (
             <ErrorBoundary>
-                <Container style={{ "width": "80em", "marginBottom": "5em"}} fluid>
+                <Container style={{ "width": "80em", "marginBottom": "5em"}} >
         
-                    <Image src={user.background_img}  className="profileBackground" fluid/>
+                    <Image src={user.background_img}  className="profileBackground" />
                     <Image src={user.avatar} rounded size="small"  className="profileImg" />
                     <Header as='h2' className="profileName" inverted>{`${user.first_name} ${user.last_name}`}</Header>
                     {(relationship === undefined) ? 

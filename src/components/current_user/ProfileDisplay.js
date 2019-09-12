@@ -14,9 +14,9 @@ class ProfileDisplay extends Component {
         
         return (
             <ErrorBoundary>
-                <Container style={{ "width": "80em", "marginBottom": "5em"}} fluid>
+                <Container style={{ "width": "80em", "marginBottom": "5em"}}>
         
-                    <Image src={current_user.background_img}  className="profileBackground" fluid/>
+                    <Image src={current_user.background_img}  className="profileBackground"/>
                     <Image src={current_user.avatar} rounded size="small"  className="profileImg" />
                     <Header as='h2' className="profileName" inverted>{`${current_user.first_name} ${current_user.last_name}`}</Header>
                     
@@ -26,7 +26,7 @@ class ProfileDisplay extends Component {
                             <ModalProfileEditForm current_user={current_user} resetAppState={resetAppState} resetCurrentUser={resetCurrentUser}/>
                         </Modal.Content>
                     </Modal>
-                    <Grid columns={3} divided inverted style={{"marginTop": "-19.5em"}}>
+                    <Grid columns={3} divided inverted style={{"marginTop": "-19.5em"}} container>
                         <Grid.Row stretched>
                             <Grid.Column>
                                 <Segment inverted color="black" textAlign="center">
