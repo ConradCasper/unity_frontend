@@ -85,7 +85,7 @@ class CommentsContainer extends Component {
                                     <Comment.Text color="white">{comment.content}</Comment.Text>
                                     {(current_user.id === comment.user_id) ? 
                                         <Comment.Actions>
-                                            <Comment.Action onClick={this.handleDelete(comment.id)}>Delete</Comment.Action>
+                                            <Comment.Action onClick={() => this.handleDelete(comment.id)}>Delete</Comment.Action>
                                         </Comment.Actions>
                                         :
                                         null
