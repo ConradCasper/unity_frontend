@@ -41,7 +41,7 @@ class MainFeed extends Component {
         
         const renderPosts = sortedFeed.map(post => {
             
-            return <ErrorBoundary key={post.id}><Post key={post.id} post={post} users={users} likes={likes} comments={comments} resetAppState={resetAppState} /></ErrorBoundary>
+            return <ErrorBoundary key={post.id}><Post key={post.id} current_user={current_user} post={post} users={users} likes={likes} comments={comments} resetAppState={resetAppState} /></ErrorBoundary>
             
         })
             
