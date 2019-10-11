@@ -42,7 +42,7 @@ class SearchUsers extends Component {
                         </Card.Description>
                     </Card.Content>
                     <Card.Content extra>
-                        <Icon name='user' />
+                        <Icon name='users' />
                                 22 Friends
                     </Card.Content>
                 
@@ -51,7 +51,7 @@ class SearchUsers extends Component {
             )
         })
                         
-                        
+        dayjs.extend(relativeTime)           
         return (
             <Container fluid style={{ "marginTop":"6.5em", "width": "400em", "paddingLeft":"45px" }} textAlign="center" >
                 
