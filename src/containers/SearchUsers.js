@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Input, Grid, Card, Container, Image, Icon, Segment } from 'semantic-ui-react'
 import { Link } from 'react-router-dom';
+import dayjs from 'dayjs'
+import relativeTime from 'dayjs/plugin/relativeTime'
 class SearchUsers extends Component {
     constructor(props){
         super(props)
@@ -33,7 +35,7 @@ class SearchUsers extends Component {
                     <Card.Content>
                         <Card.Header>{`${user.first_name} ${user.last_name}`}</Card.Header>
                         <Card.Meta>
-                            Joined in 2019
+                            Joined {dayjs(user.created_at).fromNow()}
                         </Card.Meta>
                         <Card.Description>
                             {user.bio}
@@ -55,7 +57,7 @@ class SearchUsers extends Component {
                 
                 <Grid>
                     <Grid.Row>
-                        <Segment inverted circular style={{ "width":"600px", "left":"625px", "marginTop":"50px", "marginBottom":"100px"}}>
+                        <Segment inverted circular style={{ "width":"600px", "left":"550px", "marginTop":"50px", "marginBottom":"100px"}}>
                             <Input icon="users" name="filter" value={this.state.filter} onChange={this.handleFilter} iconPosition="left" placeholder="Search Users..." style={{ "width":"400px" }} />
                         </Segment>
                     </Grid.Row>
