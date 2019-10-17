@@ -38,7 +38,10 @@ export default class SignUp extends Component {
 
         fetch(`http://localhost:3000/api/v1/users`, requestObject)
         .then(res => res.json())
-        .then(data => console.log(data))
+        .then(data => {
+            localStorage.setItem("jwt", data.jwt)
+            this.props.login(data.user)
+        })
 
         this.setState({
             first_name: '',
@@ -49,20 +52,26 @@ export default class SignUp extends Component {
 
     }
 
+    
+
 
     render() {
         return (
             
-                <Grid columns={2} className="App-header">
-                    <Grid.Column  width={5} style={{"justifyContent": "center", "alignItems": "center", "display": "flex"}} floated="left">
+                <Grid columns="equal" className="App-header">
+                <Grid.Row>
+                    <Grid.Column  width={4} style={{"justifyContent": "center", "alignItems": "center"}} >
 
-                        <header>
-                            <img src={logo} className="App-logo" alt="logo" />
-                        </header>
+                        
+                            <Image src={logo}  className="App-logo" alt="logo" style={{ "marginTop": "298px" }}/>
+                        
+
+                    </Grid.Column>
+                    <Grid.Column width={3}>
 
                     </Grid.Column>
                     
-                    <Grid.Column  width={5} style={{ "justifyContent": "center", "alignItems": "center" }} verticalAlign="middle" floated="left">
+                    <Grid.Column  width={5} style={{ "justifyContent": "center", "alignItems": "center" }} verticalAlign="middle">
                         <Header as='h2' color='orange' textAlign='center'>
                             <Image src={logo} /> Create a New Account
                         </Header>
@@ -79,6 +88,7 @@ export default class SignUp extends Component {
                             </Segment>
                         </Form>
                     </Grid.Column>
+                    </Grid.Row>
                 </Grid>
         
         )

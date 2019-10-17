@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Button, Comment, Form, Header, Segment } from 'semantic-ui-react'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
-
+// doesn't seem to need access to current user
 class CommentsContainer extends Component {
     constructor(props){
         super(props)
@@ -35,44 +35,85 @@ class CommentsContainer extends Component {
         }
         fetch(`http://localhost:3000/api/v1/comments`, request)
         .then(res => res.json())
-        .then(comment => this.props.addCommentToPost(this.state.post_id, comment))
+        .then(comment => this.props.resetAppState())
 
 
 
         this.setState({...this.state, content: ''})
 
     }
+
+
+    handleDelete = commentId => {
+        const token = localStorage.getItem("jwt")
+        const request = {
+            method: "DELETE",
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        }
+        fetch(`http://localhost:3000/api/v1/comments/${commentId}`, request)
+        .then(res => res.json())
+        .then(comment => this.props.resetAppState())
+    }
+
+
+
+
+
     render() {
-        const sortedComments = this.props.comments.sort((a, b) => b.id - a.id)
-        const comments = sortedComments.map(comment => {
-            return (
-            <Segment key={comment.id}>
-                <Comment>
-                    <Comment.Avatar src={comment.user.avatar}/>
-                    <Comment.Content>
-                        <Comment.Author as="a">{`${comment.user.first_name} ${comment.user.last_name}`}</Comment.Author>
-                        <Comment.Metadata>
-                            <div>{dayjs(comment.created_at).fromNow()}</div>
-                        </Comment.Metadata>
-                        <Comment.Text>{comment.content}</Comment.Text>
-                    </Comment.Content>
-                </Comment>
-            </Segment>
-            )
+        const { users, comments, postId, current_user } = this.props
+        const postComments = comments.filter(comment => {
+          return  comment.post_id === postId
         })
+        
+        const userComments = []
+
+        postComments.forEach(comment => {
+            
+            for (let i = 0; i < users.length; i++){
+                if(comment.user_id === users[i].id){
+                    userComments.push(
+                        <Segment key={comment.id}>
+                            <Comment>
+                                <Comment.Avatar src={users[i].avatar}/>
+                                <Comment.Content>
+                                    <Comment.Author color="white" as="a">{`${users[i].first_name} ${users[i].last_name}`}</Comment.Author>
+                                    <Comment.Metadata color="white">
+                                        <div>{dayjs(comment.created_at).fromNow()}</div>
+                                    </Comment.Metadata>
+                                    <Comment.Text color="white">{comment.content}</Comment.Text>
+                                    {(current_user.id === comment.user_id) ? 
+                                        <Comment.Actions>
+                                            <Comment.Action onClick={() => this.handleDelete(comment.id)}>Delete</Comment.Action>
+                                        </Comment.Actions>
+                                        :
+                                        null
+                                    }
+                                    
+                                </Comment.Content>
+                            </Comment>
+                        </Segment>
+                    )
+                }
+            }
+        
+        })
+            
+            
         
         
 
         dayjs.extend(relativeTime)
         return (
-            <Segment padded="very">
+            <Segment padded="very" inverted>
                 <Comment.Group>
-                    <Header as="h3" dividing>
+                    <Header as="h3" dividing inverted>
                         Comments
                     </Header>
-                    {comments}
+                    {userComments}
                     <Form reply onSubmit={this.handleOnSubmit}>
-                        <Form.TextArea value={this.state.content} name="content" onChange={this.handleOnChange}/>
+                        <Form.TextArea value={this.state.content} name="content" placeholder="Speak your mind..." onChange={this.handleOnChange}/>
                         <Button content='Add Comment' labelPosition='left' icon='edit' color="orange" type="submit"/>
                     </Form>
                 </Comment.Group>

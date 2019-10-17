@@ -1,21 +1,85 @@
 import React, { Component } from 'react';
 import { Feed } from 'semantic-ui-react'
 import Post from '../components/posts/Post'
+import ErrorBoundary from '../components/ErrorBoundary'
 
 
 class MainFeed extends Component {
+
+    
     
     render() {
-        const posts = this.props.posts.map(post => {
-            return <Post key={post.id} post={post} addCommentToPost={this.props.addCommentToPost} />
+        if(this.props === undefined) { return null }
+        // check
+        const { current_user, likes, comments, users, posts, follows, resetAppState } = this.props
+    
+        
+        // check
+        const current_user_follows = follows.filter(follow => follow.follower_id === current_user.id) 
+        // works now
+        const current_user_posts = [] 
+        const followed_user_posts = []
+
+        posts.forEach(post => {
+            if(post.user_id === current_user.id){
+                current_user_posts.push(post)
+            }
         })
+
+        posts.forEach(post => {
+            current_user_follows.forEach(follow =>{
+                if(post.user_id === follow.followee_id){
+                    followed_user_posts.push(post)
+                }
+            }) 
+        })
+
+        const wholeFeed = [...current_user_posts, ...followed_user_posts]
+        const sortedFeed = wholeFeed.sort( (a, b) => {
+            return b.id - a.id
+        })
+        
+        const renderPosts = sortedFeed.map(post => {
+            
+            return <ErrorBoundary key={post.id}><Post key={post.id} current_user={current_user} post={post} users={users} likes={likes} comments={comments} resetAppState={resetAppState} /></ErrorBoundary>
+            
+        })
+            
         return (
-           
-            <Feed className="MainFeed">
-                {posts}
-            </Feed>
+           <ErrorBoundary>
+                <Feed className="MainFeed">
+                    {renderPosts}
+                </Feed>
+            </ErrorBoundary>
         );
     }
 }
 
 export default MainFeed;
+
+
+
+        
+        
+
+            
+        
+            
+                   
+               
+        
+
+        
+            
+            
+                    
+                    
+                    
+                    
+                
+                
+        
+
+
+
+        
