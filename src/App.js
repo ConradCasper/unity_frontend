@@ -62,35 +62,35 @@ class App extends Component{
 
 
   fetchPosts = () => {
-    fetch(`http://localhost:3000/api/v1/posts`, { signal: this.controller.signal })
+    fetch(`https://damp-tundra-82698.herokuapp.com/api/v1/posts`, { signal: this.controller.signal })
     .then(res => res.json())
     // .then(data => console.log(data.posts))
     .then(data => this.setState({posts: data.posts}))
   }
 
   fetchComments = () => {
-    fetch(`http://localhost:3000/api/v1/comments`, { signal: this.controller.signal })
+    fetch(`https://damp-tundra-82698.herokuapp.com/api/v1/comments`, { signal: this.controller.signal })
     .then(res => res.json())
     // .then(data => console.log(data.comments))
     .then(data => this.setState({comments: data.comments}))
   }
 
   fetchLikes = () => {
-    fetch(`http://localhost:3000/api/v1/likes`, { signal: this.controller.signal })
+    fetch(`https://damp-tundra-82698.herokuapp.com/api/v1/likes`, { signal: this.controller.signal })
     .then(res => res.json())
     // .then(data => console.log(data.likes))
     .then(data => this.setState({likes: data.likes}))
   }
 
   fetchUsers = () => {
-    fetch(`http://localhost:3000/api/v1/users`, { signal: this.controller.signal })
+    fetch(`https://damp-tundra-82698.herokuapp.com/api/v1/users`, { signal: this.controller.signal })
     .then(res => res.json())
     // .then(data => console.log(data.users))
     .then(data => this.setState({users: data.users}))
   }
 
   fetchFollows = () => {
-    fetch(`http://localhost:3000/api/v1/follows`, { signal: this.controller.signal })
+    fetch(`https://damp-tundra-82698.herokuapp.com/api/v1/follows`, { signal: this.controller.signal })
     .then(res => res.json())
     // .then(data => console.log(data.follows))
     .then(data => this.setState({follows: data.follows}))
@@ -127,7 +127,7 @@ class App extends Component{
                   <Route exact path="/welcome" render={() => ( this.state.current_user === null ? (<SignUp login={this.login} />)  : (<Redirect to="/profile"/>) )}/>
                   <Route exact path='/home' render={ () => (<Home posts={this.state.posts} current_user={this.state.current_user} follows={this.state.follows} comments={this.state.comments} likes={this.state.likes} users={this.state.users}  resetAppState={this.resetAppState}/>)} />
                   <Route exact path='/profile' render={ () => (<Profile posts={this.state.posts} current_user={this.state.current_user} resetCurrentUser={this.resetCurrentUser} follows={this.state.follows} comments={this.state.comments} likes={this.state.likes} users={this.state.users}  resetAppState={this.resetAppState}/>)} />) } />
-                  <Route exact path='/search' render={ () => (<SearchUsers users={this.state.users} />) } />
+                  <Route exact path='/search' render={ () => (<SearchUsers users={this.state.users} follows={this.state.follows} />) } />
                   <Route exact path='/user/:id' render={({ match }) => {
                     return <UserProfile user={this.showUser(match.params.id)} current_user={this.state.current_user}  users={this.state.users} follows={this.state.follows} posts={this.state.posts} comments={this.state.comments} likes={this.state.likes} resetAppState={this.resetAppState} />
                   }} />

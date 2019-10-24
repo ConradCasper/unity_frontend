@@ -35,7 +35,7 @@ class PostForm extends Component {
             })
         }
 
-        fetch(`http://localhost:3000/api/v1/posts`, request)
+        fetch(`https://damp-tundra-82698.herokuapp.com/api/v1/posts`, request)
         .then(res => res.json())
         .then(post => this.props.resetAppState())
 

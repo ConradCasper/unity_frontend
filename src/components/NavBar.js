@@ -40,7 +40,7 @@ class NavBar extends Component {
             })
         }
 
-        fetch(`http://localhost:3000/api/v1/login`, requestObject)
+        fetch(`https://damp-tundra-82698.herokuapp.com/api/v1/login`, requestObject)
         .then(res => res.json())
         .then(data => {
             localStorage.setItem("jwt", data.jwt)

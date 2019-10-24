@@ -21,11 +21,15 @@ class SearchUsers extends Component {
 
 
     render() {
-        const { users } = this.props
+        const { users, follows } = this.props
         const filteredUsers = users.filter(user => {
             return user.first_name.toLowerCase().startsWith(this.state.filter.toLowerCase())
         })
         const renderUsers = filteredUsers.map(user => {
+            const following = follows.filter(follow => follow.follower_id === user.id)
+            
+
+            const followers = follows.filter(follow => follow.followee_id === user.id)
             return (
                 
                 <Card key={user.id} color='teal' style={{ "marginRight":"10px", "marginLeft":"10px" }}>
@@ -42,8 +46,8 @@ class SearchUsers extends Component {
                         </Card.Description>
                     </Card.Content>
                     <Card.Content extra>
-                        <Icon name='users' />
-                                22 Friends
+                        <Icon name='users' iconPosition="left"/>
+                                following: {following.length} | followers: {followers.length}
                     </Card.Content>
                 
                 </Card>
