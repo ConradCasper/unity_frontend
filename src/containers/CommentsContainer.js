@@ -33,7 +33,7 @@ class CommentsContainer extends Component {
                 comment: comment
             })
         }
-        fetch(`http://localhost:3000/api/v1/comments`, request)
+        fetch(`https://damp-tundra-82698.herokuapp.com/api/v1/comments`, request)
         .then(res => res.json())
         .then(comment => this.props.resetAppState())
 
@@ -52,7 +52,7 @@ class CommentsContainer extends Component {
                 "Authorization": `Bearer ${token}`
             }
         }
-        fetch(`http://localhost:3000/api/v1/comments/${commentId}`, request)
+        fetch(`https://damp-tundra-82698.herokuapp.com/api/v1/comments/${commentId}`, request)
         .then(res => res.json())
         .then(comment => this.props.resetAppState())
     }

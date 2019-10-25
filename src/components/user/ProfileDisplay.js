@@ -28,7 +28,7 @@ class ProfileDisplay extends Component {
                 }
             })
         }
-        fetch('http://localhost:3000/api/v1/follows', request)
+        fetch('https://damp-tundra-82698.herokuapp.com/api/v1/follows', request)
         .then(res => res.json())
         .then(data => {
             this.props.resetAppState()
@@ -46,7 +46,7 @@ class ProfileDisplay extends Component {
                 "Authorization": `Bearer ${token}`
             }
         }
-        fetch(`http://localhost:3000/api/v1/follows/${id}`, request)
+        fetch(`https://damp-tundra-82698.herokuapp.com/api/v1/follows/${id}`, request)
         .then(res => res.json())
         .then(data => {
             this.props.resetAppState()

@@ -27,7 +27,7 @@ class Post extends Component {
                 })
             }
 
-            fetch(`http://localhost:3000/api/v1/likes`, request)
+            fetch(`https://damp-tundra-82698.herokuapp.com/api/v1/likes`, request)
             .then(res => res.json())
             .then(post => this.props.resetAppState())
         } else {
@@ -40,7 +40,7 @@ class Post extends Component {
                 }
             }
 
-            fetch(`http://localhost:3000/api/v1/likes/${likedOrNot.id}`, request)
+            fetch(`https://damp-tundra-82698.herokuapp.com/api/v1/likes/${likedOrNot.id}`, request)
             .then(res => res.json())
             .then(like => this.props.resetAppState())
         }
