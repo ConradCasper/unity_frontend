@@ -124,7 +124,7 @@ class App extends Component{
       <div className="App" >
           <NavBar login={this.login} logout={this.logout} current_user={this.state.current_user}/>
               <Switch>
-                  <Route exact path="/welcome" render={() => ( this.state.current_user === null ? (<SignUp login={this.login} />)  : (<Redirect to="/profile"/>) )}/>
+                  <Route exact path="/" render={() => ( this.state.current_user === null ? (<SignUp login={this.login} />)  : (<Redirect to="/profile"/>) )}/>
                   <Route exact path='/home' render={ () => (<Home posts={this.state.posts} current_user={this.state.current_user} follows={this.state.follows} comments={this.state.comments} likes={this.state.likes} users={this.state.users}  resetAppState={this.resetAppState}/>)} />
                   <Route exact path='/profile' render={ () => (<Profile posts={this.state.posts} current_user={this.state.current_user} resetCurrentUser={this.resetCurrentUser} follows={this.state.follows} comments={this.state.comments} likes={this.state.likes} users={this.state.users}  resetAppState={this.resetAppState}/>)} />) } />
                   <Route exact path='/search' render={ () => (<SearchUsers users={this.state.users} follows={this.state.follows} />) } />
