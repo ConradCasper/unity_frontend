@@ -46,7 +46,7 @@ class App extends Component{
     this.setState({
       ...this.state, current_user: null
     })
-    this.props.history.push("/welcome")
+    this.props.history.push("/")
     this.resetAppState()
     localStorage.clear()
   }
