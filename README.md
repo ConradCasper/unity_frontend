@@ -11,7 +11,7 @@ A simple image sharing social media app built as my final project at Flatiron Sc
 ## Technologies
 
 - React.JS
-- Ruby on Rails
+- Ruby on Rails, [link to API repository](https://github.com/conradcasper22/unity_backend)
 - Semantic UI React
 
 ## Planning
