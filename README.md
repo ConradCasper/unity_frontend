@@ -6,7 +6,7 @@ A simple image sharing social media app built as my final project at Flatiron Sc
 
 ![](https://i.imgur.com/gVUOarB.png)
 
-- [Demo](https://evening-eyrie-02136.herokuapp.com/)
+- [Live App Hosted on Heroku](https://evening-eyrie-02136.herokuapp.com/)
 
 --- 
 
@@ -16,6 +16,7 @@ A simple image sharing social media app built as my final project at Flatiron Sc
 - React Router
 - Ruby on Rails, [link to API repository](https://github.com/conradcasper22/unity_backend)
 - Semantic UI React
+- Heroku
 
 ## Planning
 
