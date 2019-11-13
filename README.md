@@ -13,6 +13,17 @@ A simple image sharing social media app built as my final project at Flatiron Sc
 - React.JS
 - Ruby on Rails
 - Semantic UI React
+
+## Planning
+
+- Trello
+
+![](https://i.imgur.com/jKaNCGF.jpg)
+
+- Lucid Chart
+
+![](https://i.imgur.com/ubfvKge.png)
+
 ## Contributors 
 
 - Conrad A Casper <cnrdcasper@gmail.com>
